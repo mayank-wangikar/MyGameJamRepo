@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://i6hfdnwnet4r"]
+
+[ext_resource type="Script" uid="uid://b1m0ktj7dcn3i" path="res://typing_game.gd" id="1_o3efb"]
+
+[node name="TypingGame" type="Control" unique_id=889836055]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o3efb")
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="." unique_id=1577878925]
+wait_time = 30.0
+one_shot = true
+
+[node name="MarginContainer" type="Control" parent="." unique_id=760652824]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="Control" parent="MarginContainer" unique_id=1003091347]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=821163162]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -73.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Time: 30s"
+metadata/_edit_use_anchors_ = true
+
+[node name="TargetLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1134653583]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.5
+offset_right = 26.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "A S D F"
+metadata/_edit_use_anchors_ = true
+
+[node name="HighScoreLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=523360426]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 114.0
+grow_vertical = 0
+text = "High Score: 0%"
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=605573286]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "_ _ _ _"
+metadata/_edit_use_anchors_ = true
+
+[node name="AccuracyLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=340147495]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Accuracy 100%"
+metadata/_edit_use_anchors_ = true
