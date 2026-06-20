@@ -1,5 +1,7 @@
 extends Control
 
+signal correct_press
+	
 # --- Node references ---
 @onready var timer: Timer = $Timer
 @onready var target_label: Label = $MarginContainer/VBoxContainer/TargetLabel
@@ -59,6 +61,7 @@ func _handle_key_press(pressed_key: String) -> void:
 	if pressed_key == expected_key:
 		round_correct_presses += 1
 		current_index += 1
+		correct_press.emit()
 	_update_accuracy_display()
 	_update_progress_display()
 	if current_index >= target_set.size():
