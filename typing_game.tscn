@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://i6hfdnwnet4r"]
 
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://bvdjpo2dl0rm1" path="res://typing_game.gd" id="1_o3efb"]
+=======
+[ext_resource type="Script" uid="uid://gq6ffmebf7k3" path="res://typing_game.gd" id="1_o3efb"]
+[ext_resource type="Script" uid="uid://bnv2p0c0s6yws" path="res://wheel.gd" id="2_x8igm"]
+>>>>>>> b981ba2f3245cd9718ff01eaeabda7c228dbd46e
 
 [node name="TypingGame" type="Control" unique_id=889836055]
 layout_mode = 3
@@ -54,6 +59,25 @@ grow_vertical = 0
 text = "High Score: 0%"
 metadata/_edit_use_anchors_ = true
 
+<<<<<<< HEAD
+=======
+[node name="ProgressLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=605573286]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 176.0
+offset_right = 20.0
+offset_bottom = 199.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "_ _ _ _"
+metadata/_edit_use_anchors_ = true
+
+>>>>>>> b981ba2f3245cd9718ff01eaeabda7c228dbd46e
 [node name="AccuracyLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=340147495]
 layout_mode = 0
 offset_right = 40.0
@@ -61,6 +85,7 @@ offset_bottom = 23.0
 text = "Accuracy 100%"
 metadata/_edit_use_anchors_ = true
 
+<<<<<<< HEAD
 [node name="DiamondContainer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=833528137]
 layout_mode = 1
 anchor_left = 0.43800002
@@ -108,3 +133,10 @@ offset_top = 160.0
 offset_right = 160.0
 offset_bottom = 220.0
 theme_override_font_sizes/font_size = 32
+=======
+[node name="wheel" type="Sprite2D" parent="." unique_id=590592376]
+position = Vector2(577, 324)
+script = ExtResource("2_x8igm")
+
+[connection signal="correct_press" from="." to="wheel" method="add_spin"]
+>>>>>>> b981ba2f3245cd9718ff01eaeabda7c228dbd46e

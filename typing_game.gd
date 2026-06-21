@@ -67,6 +67,8 @@ func _handle_key_press(pressed_char: String) -> void:
 
 	if pressed_char == expected_char:
 		current_index += 1
+if pressed_char == expected_char:
+		current_index += 1
 
 	_update_diamond_highlight()
 
@@ -80,7 +82,6 @@ func _handle_key_press(pressed_char: String) -> void:
 
 func _award_energy_for_cycle() -> void:
 	energy_points = int(min(100, energy_points + ENERGY_PER_CYCLE))
-
 
 func _on_timer_timeout() -> void:
 	if energy_points > high_score_energy:
