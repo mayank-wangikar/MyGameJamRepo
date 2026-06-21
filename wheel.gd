@@ -1,37 +1,45 @@
 extends Sprite2D
 
-# --- spin ---
-var angular_velocity := 0.0
-const FRICTION := 1.2
-const SPIN_PER_PRESS := 1.5
-const MAX_SPIN := 25.0
-
-# --- ring look (tweak these in the Inspector) ---
+@export var projectile_scene: PackedScene
 @export var radius := 120.0
 @export var rim_width := 12.0
 @export var spokes := 8
+const SPIN_SPEED := 5.0          # fixed spin (stands in for the real charge)
+const LAUNCH_POWER := 1.0        # fixed energy for now
+const RESPIN_DELAY := 0.4        # auto spins back up after firing
 var ring_color := Color.WHITE
+var spinning := true
 
-func _ready() -> void:
-	_recenter()
-	get_viewport().size_changed.connect(_recenter)
-
-func _recenter() -> void:
-	global_position = get_viewport_rect().size / 2.0
-	
 func _process(delta: float) -> void:
-	rotation += angular_velocity * delta
-	angular_velocity = move_toward(angular_velocity, 0.0, FRICTION * delta)
+	rotation += SPIN_SPEED * delta
+func _ready() -> void:
+	_place()
+	get_viewport().size_changed.connect(_place)
 
-func add_spin() -> void:
-	angular_velocity = min(angular_velocity + SPIN_PER_PRESS, MAX_SPIN)
+func _place() -> void:
+	var vp := get_viewport_rect().size
+	global_position = Vector2(vp.x * 0.25, vp.y * 0.5)
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
+		_fire()
+
+func _fire() -> void:
+	if projectile_scene == null:
+		return
+	var edge := global_position + Vector2.from_angle(rotation) * radius
+	var dir := Vector2.from_angle(rotation + PI / 2.0)
+	var p := projectile_scene.instantiate()
+	get_tree().current_scene.add_child(p)
+	p.global_position = edge
+	p.launch(dir, LAUNCH_POWER)
 
 func _draw() -> void:
-	# the rim — a full-circle arc is the ring
 	draw_arc(Vector2.ZERO, radius, 0, TAU, 64, ring_color, rim_width, true)
-	# spokes (these are what make the spin actually visible)
 	for i in spokes:
-		var dir := Vector2(cos(TAU * i / spokes), sin(TAU * i / spokes))
+		var dir := Vector2.from_angle(TAU * i / spokes)
 		draw_line(dir * radius * 0.18, dir * (radius - rim_width * 0.5), ring_color, 4.0, true)
-	# hub
 	draw_circle(Vector2.ZERO, radius * 0.12, ring_color)
+	# loaded shot + fling direction (rides around with the wheel)
+	var launch_pt := Vector2(radius, 0)
+	draw_circle(launch_pt, 10.0, Color.YELLOW)
+	draw_line(launch_pt, launch_pt + Vector2(0, 1) * 45.0, Color.YELLOW, 3.0, true)	

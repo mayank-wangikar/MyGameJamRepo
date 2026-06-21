@@ -70,7 +70,7 @@ func _handle_key_press(pressed_char: String) -> void:
 		current_index += 1
 		# Tell the wheel to spin a bit, directly — no signal needed since
 		# both nodes live in the same scene and we have a direct reference.
-		wheel.add_spin()
+			wheel.add_spin()
 
 	_update_diamond_highlight()
 

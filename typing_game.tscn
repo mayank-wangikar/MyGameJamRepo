@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://i6hfdnwnet4r"]
 
-[ext_resource type="Script" uid="uid://bvdjpo2dl0rm1" path="res://typing_game.gd" id="1_o3efb"]
-[ext_resource type="Script" uid="uid://k4h5mftspaw5" path="res://wheel.gd" id="2_x8igm"]
+[ext_resource type="Script" uid="uid://gq6ffmebf7k3" path="res://typing_game.gd" id="1_o3efb"]
 
 [node name="TypingGame" type="Control" unique_id=889836055]
 layout_mode = 3
@@ -109,7 +108,3 @@ offset_top = 160.0
 offset_right = 160.0
 offset_bottom = 220.0
 theme_override_font_sizes/font_size = 32
-
-[node name="wheel" type="Sprite2D" parent="." unique_id=590592376]
-position = Vector2(200, 324)
-script = ExtResource("2_x8igm")
