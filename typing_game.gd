@@ -2,29 +2,37 @@ extends Control
 
 # --- Node references ---
 @onready var timer: Timer = $Timer
-@onready var target_label: Label = $MarginContainer/VBoxContainer/TargetLabel
-@onready var progress_label: Label = $MarginContainer/VBoxContainer/ProgressLabel
-@onready var accuracy_label: Label = $MarginContainer/VBoxContainer/AccuracyLabel
+@onready var top_label: Label = $MarginContainer/VBoxContainer/DiamondContainer/TopLabel
+@onready var left_label: Label = $MarginContainer/VBoxContainer/DiamondContainer/LeftLabel
+@onready var right_label: Label = $MarginContainer/VBoxContainer/DiamondContainer/RightLabel
+@onready var bottom_label: Label = $MarginContainer/VBoxContainer/DiamondContainer/BottomLabel
+@onready var energy_label: Label = $MarginContainer/VBoxContainer/AccuracyLabel
 @onready var time_label: Label = $MarginContainer/VBoxContainer/TimeLabel
 @onready var high_score_label: Label = $MarginContainer/VBoxContainer/HighScoreLabel
 
 # --- Config ---
-const ALLOWED_KEYS: Array[String] = ["A", "S", "D", "F", "J", "K", "L", ";"]
-const TARGET_LENGTH: int = 4
-const ROUND_DURATION: float = 30.0
+const ROUND_DURATION: float = 15.0
+const ENERGY_PER_CYCLE: int = 10   # energy awarded per fully-completed diamond
 
-const KEY_TO_STRING: Dictionary = {
-	KEY_A: "A", KEY_S: "S", KEY_D: "D", KEY_F: "F",
-	KEY_J: "J", KEY_K: "K", KEY_L: "L", KEY_SEMICOLON: ";",
-}
+# Each entry is a 4-letter cluster matched to real keyboard finger positions.
+# Order within each cluster = [Top, Left, Right, Bottom] for the visual diamond.
+const DIAMOND_CLUSTERS: Array[Array] = [
+	["E", "S", "D", "X"],
+	["R", "D", "F", "C"],
+	["T", "F", "G", "V"],
+	["Y", "G", "H", "B"],
+	["U", "H", "J", "N"],
+	["I", "J", "K", "M"],
+]
 
 # --- State ---
-var target_set: Array[String] = []
-var current_index: int = 0
-var round_correct_presses: int = 0
-var round_total_presses: int = 0
-var high_score_accuracy: float = 0.0
+var target_letters: Array[String] = []   # [Top, Left, Right, Bottom] for current round
+var current_index: int = 0               # 0=Top, 1=Left, 2=Right, 3=Bottom, 4=done
 var time_remaining: float = ROUND_DURATION
+
+# --- Scoring ---
+var energy_points: int = 0
+var high_score_energy: int = 0
 
 
 func _ready() -> void:
@@ -44,67 +52,79 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		var key_event := event as InputEventKey
-		var pressed_string: String = KEY_TO_STRING.get(key_event.keycode, "")
-		if pressed_string == "":
+		var pressed_char: String = key_event.as_text_key_label().to_upper()
+		if pressed_char.length() != 1:
 			return
-		_handle_key_press(pressed_string)
+		_handle_key_press(pressed_char)
 		get_viewport().set_input_as_handled()
 
 
-func _handle_key_press(pressed_key: String) -> void:
-	if current_index >= target_set.size():
+func _handle_key_press(pressed_char: String) -> void:
+	if current_index >= target_letters.size():
 		return
-	var expected_key: String = target_set[current_index]
-	round_total_presses += 1
-	if pressed_key == expected_key:
-		round_correct_presses += 1
+
+	var expected_char: String = target_letters[current_index]
+
+	if pressed_char == expected_char:
 		current_index += 1
-	_update_accuracy_display()
-	_update_progress_display()
-	if current_index >= target_set.size():
-		# Word stays the same until the 30s timer fires.
-		# Loop back to the start so the player can retype it again.
-		current_index = 0
-		_update_progress_display()
+
+	_update_diamond_highlight()
+
+	if current_index >= target_letters.size():
+		# Completed all 4 corners — award energy, then roll a new diamond.
+		_award_energy_for_cycle()
+		_generate_new_target()
+	
+	_update_energy_display()
+
+
+func _award_energy_for_cycle() -> void:
+	energy_points = int(min(100, energy_points + ENERGY_PER_CYCLE))
 
 
 func _on_timer_timeout() -> void:
-	var final_accuracy: float = _calculate_accuracy()
-	if final_accuracy > high_score_accuracy:
-		high_score_accuracy = final_accuracy
-		high_score_label.text = "High Score: %d%%" % round(high_score_accuracy)
+	if energy_points > high_score_energy:
+		high_score_energy = energy_points
+		high_score_label.text = "High Score: %d Energy" % high_score_energy
 	_start_new_round()
 
 
 func _start_new_round() -> void:
-	round_correct_presses = 0
-	round_total_presses = 0
+	current_index = 0
+	energy_points = 0
 	time_remaining = ROUND_DURATION
 	_generate_new_target()
-	_update_accuracy_display()
-	_update_progress_display()
+	_update_energy_display()
 
 
 func _generate_new_target() -> void:
-	target_set.clear()
+	var chosen_cluster: Array = DIAMOND_CLUSTERS[randi() % DIAMOND_CLUSTERS.size()]
+	
+	# chosen_cluster is stored as [Top, Left, Right, Bottom] (visual order),
+	# but target_letters is reordered to [Top, Left, Bottom, Right] —
+	# the order the PLAYER must type them in.
+	target_letters = [chosen_cluster[0], chosen_cluster[1], chosen_cluster[3], chosen_cluster[2]]
 	current_index = 0
-	for i in range(TARGET_LENGTH):
-		target_set.append(ALLOWED_KEYS[randi() % ALLOWED_KEYS.size()])
-	target_label.text = " ".join(target_set)
+
+	top_label.text = chosen_cluster[0]
+	left_label.text = chosen_cluster[1]
+	right_label.text = chosen_cluster[2]
+	bottom_label.text = chosen_cluster[3]
+
+	_update_diamond_highlight()
 
 
-func _update_progress_display() -> void:
-	var parts: Array[String] = []
-	for i in range(target_set.size()):
-		parts.append(target_set[i] if i < current_index else "_")
-	progress_label.text = " ".join(parts)
+func _update_diamond_highlight() -> void:
+	# Highlight order follows the TYPING order: Top, Left, Bottom, Right.
+	var labels_in_typing_order: Array[Label] = [top_label, left_label, bottom_label, right_label]
+	for i in range(labels_in_typing_order.size()):
+		if i < current_index:
+			labels_in_typing_order[i].modulate = Color(0.4, 0.4, 0.4)   # already typed
+		elif i == current_index:
+			labels_in_typing_order[i].modulate = Color(1.0, 0.85, 0.2)  # type this one next
+		else:
+			labels_in_typing_order[i].modulate = Color(1.0, 1.0, 1.0)   # not yet reached
 
 
-func _update_accuracy_display() -> void:
-	accuracy_label.text = "Accuracy: %d%%" % round(_calculate_accuracy())
-
-
-func _calculate_accuracy() -> float:
-	if round_total_presses == 0:
-		return 100.0
-	return (float(round_correct_presses) / float(round_total_presses)) * 100.0
+func _update_energy_display() -> void:
+	energy_label.text = "Energy: %d / 100" % energy_points
