@@ -9,13 +9,14 @@ extends Control
 @onready var energy_label: Label = $MarginContainer/VBoxContainer/AccuracyLabel
 @onready var time_label: Label = $MarginContainer/VBoxContainer/TimeLabel
 @onready var high_score_label: Label = $MarginContainer/VBoxContainer/HighScoreLabel
+@onready var wheel: Sprite2D = $wheel
 
 # --- Config ---
 const ROUND_DURATION: float = 15.0
 const ENERGY_PER_CYCLE: int = 10   # energy awarded per fully-completed diamond
 
 # Each entry is a 4-letter cluster matched to real keyboard finger positions.
-# Order within each cluster = [Top, Left, Right, Bottom] for the visual diamond.
+# Stored as [Top, Left, Right, Bottom] for the visual diamond shape.
 const DIAMOND_CLUSTERS: Array[Array] = [
 	["E", "S", "D", "X"],
 	["R", "D", "F", "C"],
@@ -26,8 +27,8 @@ const DIAMOND_CLUSTERS: Array[Array] = [
 ]
 
 # --- State ---
-var target_letters: Array[String] = []   # [Top, Left, Right, Bottom] for current round
-var current_index: int = 0               # 0=Top, 1=Left, 2=Right, 3=Bottom, 4=done
+var target_letters: Array[String] = []   # typing order: [Top, Left, Bottom, Right]
+var current_index: int = 0               # 0=Top, 1=Left, 2=Bottom, 3=Right, 4=done
 var time_remaining: float = ROUND_DURATION
 
 # --- Scoring ---
@@ -67,21 +68,25 @@ func _handle_key_press(pressed_char: String) -> void:
 
 	if pressed_char == expected_char:
 		current_index += 1
-if pressed_char == expected_char:
-		current_index += 1
+		# Tell the wheel to spin a bit, directly — no signal needed since
+		# both nodes live in the same scene and we have a direct reference.
+		wheel.add_spin()
 
 	_update_diamond_highlight()
 
 	if current_index >= target_letters.size():
-		# Completed all 4 corners — award energy, then roll a new diamond.
+		# Completed all 4 corners — award energy, give the wheel a bigger
+		# spin as a "level up" moment, then roll a new diamond.
 		_award_energy_for_cycle()
+		wheel.add_spin()  # extra spin burst on full completion
 		_generate_new_target()
-	
+
 	_update_energy_display()
 
 
 func _award_energy_for_cycle() -> void:
 	energy_points = int(min(100, energy_points + ENERGY_PER_CYCLE))
+
 
 func _on_timer_timeout() -> void:
 	if energy_points > high_score_energy:
@@ -100,9 +105,9 @@ func _start_new_round() -> void:
 
 func _generate_new_target() -> void:
 	var chosen_cluster: Array = DIAMOND_CLUSTERS[randi() % DIAMOND_CLUSTERS.size()]
-	
-	# chosen_cluster is stored as [Top, Left, Right, Bottom] (visual order),
-	# but target_letters is reordered to [Top, Left, Bottom, Right] —
+
+	# chosen_cluster is [Top, Left, Right, Bottom] (visual order).
+	# target_letters is reordered to [Top, Left, Bottom, Right] —
 	# the order the PLAYER must type them in.
 	target_letters = [chosen_cluster[0], chosen_cluster[1], chosen_cluster[3], chosen_cluster[2]]
 	current_index = 0
