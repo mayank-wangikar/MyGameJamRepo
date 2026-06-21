@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://rbsfjr1c38dd"]
+
+[ext_resource type="Script" uid="uid://k4h5mftspaw5" path="res://scripts/wheel.gd" id="1_jk8w3"]
+[ext_resource type="PackedScene" uid="uid://b5xmov3ilwllk" path="res://scenes/projectile.tscn" id="2_hfj2o"]
+[ext_resource type="Script" uid="uid://cxu5bo1db6hbd" path="res://scripts/wall.gd" id="4_hfj2o"]
+
+[node name="Launch" type="Node2D" unique_id=1448617343]
+
+[node name="wheel" type="Sprite2D" parent="." unique_id=55805259]
+position = Vector2(200, 324)
+script = ExtResource("1_jk8w3")
+projectile_scene = ExtResource("2_hfj2o")
+
+[node name="RightWall" type="Node2D" parent="." unique_id=873534598]
+position = Vector2(1090, 324)
+script = ExtResource("4_hfj2o")
+
+[node name="LeftWall" type="Node2D" parent="." unique_id=1111163360]
+position = Vector2(60, 324)
+script = ExtResource("4_hfj2o")

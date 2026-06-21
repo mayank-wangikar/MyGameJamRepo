@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Veryseriousgamejam"
-run/main_scene="uid://i6hfdnwnet4r"
+run/main_scene="uid://d1lp4cquf24u8"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

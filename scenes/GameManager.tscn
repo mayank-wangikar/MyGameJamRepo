@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d1lp4cquf24u8"]
+
+[ext_resource type="Script" uid="uid://c85vqyhkjjwxh" path="res://scripts/game_manager.gd" id="1_3dus2"]
+[ext_resource type="PackedScene" uid="uid://i6hfdnwnet4r" path="res://scenes/typing_game.tscn" id="1_4dhvd"]
+[ext_resource type="PackedScene" uid="uid://rbsfjr1c38dd" path="res://scenes/launch.tscn" id="2_3dus2"]
+[ext_resource type="Script" uid="uid://cuawo7wd45flh" path="res://scripts/mouse.gd" id="4_3dus2"]
+
+[node name="GameManager" type="Node2D" unique_id=1972943202]
+script = ExtResource("1_3dus2")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=189489566]
+
+[node name="TypingGame" parent="." unique_id=889836055 instance=ExtResource("1_4dhvd")]
+
+[node name="Launch" parent="." unique_id=1448617343 instance=ExtResource("2_3dus2")]
+
+[node name="Mouse" type="Sprite2D" parent="." unique_id=1788088519]
+script = ExtResource("4_3dus2")

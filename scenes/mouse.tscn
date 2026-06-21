@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d4kuop2lu8xgl"]
+
+[ext_resource type="Script" uid="uid://cuawo7wd45flh" path="res://scripts/mouse.gd" id="1_5v7j2"]
+
+[node name="Mouse" type="Node2D" unique_id=1036349004]
+script = ExtResource("1_5v7j2")
