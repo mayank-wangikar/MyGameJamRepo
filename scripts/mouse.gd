@@ -1,29 +1,39 @@
-extends Sprite2D
+extends Node2D
 
-@export var typing_position: Vector2 = Vector2(150, 500)
-@export var wheel_position: Vector2 = Vector2(576, 324)
-const MOVE_SPEED := 600.0
-
-var target_position: Vector2
-
+var _tween: Tween = null
+const MOUSE_SIZE := 18.0
+var attached_to_wheel: bool = false
+var wheel_node: Node2D = null
 
 func _ready() -> void:
-	# Simple placeholder look: a colored square via a generated texture,
-	# so there's something visible without needing real art yet.
-	var img := Image.create(40, 40, false, Image.FORMAT_RGBA8)
-	img.fill(Color(1.0, 0.5, 0.2))
-	texture = ImageTexture.create_from_image(img)
-	target_position = typing_position
-	global_position = typing_position
+	queue_redraw()
 
+func _process(_delta: float) -> void:
+	if attached_to_wheel and wheel_node != null:
+		# Sit on the rim of the wheel, rotating with it
+		var offset := Vector2(wheel_node.radius, 0).rotated(wheel_node.rotation)
+		global_position = wheel_node.global_position + offset
 
-func _process(delta: float) -> void:
-	global_position = global_position.move_toward(target_position, MOVE_SPEED * delta)
+func _draw() -> void:
+	draw_circle(Vector2.ZERO, MOUSE_SIZE, Color(1.0, 0.45, 0.0))
+	draw_circle(Vector2.ZERO, MOUSE_SIZE, Color.WHITE, false, 2.0)
+	draw_circle(Vector2(-10, -14), 6.0, Color(1.0, 0.45, 0.0))
+	draw_circle(Vector2(10, -14), 6.0, Color(1.0, 0.45, 0.0))
+	draw_circle(Vector2(-6, -4), 3.0, Color.BLACK)
+	draw_circle(Vector2(6, -4), 3.0, Color.BLACK)
 
+func go_typing() -> void:
+	attached_to_wheel = false
+	wheel_node = null
+	_move_to(Vector2(480, 472))
 
-func move_to_wheel() -> void:
-	target_position = wheel_position
+func go_shooting(wheel: Node2D) -> void:
+	attached_to_wheel = true
+	wheel_node = wheel
+	# No tween needed — _process will track the wheel every frame
 
-
-func move_to_typing() -> void:
-	target_position = typing_position
+func _move_to(target: Vector2) -> void:
+	if _tween:
+		_tween.kill()
+	_tween = create_tween()
+	_tween.tween_property(self, "position", target, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

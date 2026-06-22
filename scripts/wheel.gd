@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 @export var projectile_scene: PackedScene
 @export var radius := 60.0
@@ -11,14 +11,14 @@ var ring_color := Color.WHITE
 var is_active: bool = false   # GameManager turns this on during SHOOTING phase
 
 
-func _ready() -> void:
-	_place()
-	get_viewport().size_changed.connect(_place)
+#func _ready() -> void:
+	#_place()
+	#get_viewport().size_changed.connect(_place)
 
 
-func _place() -> void:
-	var vp := get_viewport_rect().size
-	global_position = Vector2(vp.x * 0.5, vp.y * 0.5)
+#func _place() -> void:
+	#var vp := get_viewport_rect().size
+	#global_position = Vector2(vp.x * 0.5, vp.y * 0.5)
 
 
 func _process(delta: float) -> void:

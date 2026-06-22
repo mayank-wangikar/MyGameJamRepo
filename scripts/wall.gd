@@ -1,8 +1,8 @@
 extends Node2D
 
 # --- Layout ---
-@export var wall_height := 400.0      # total height of the wall
-@export var wall_width := 30.0        # thickness of the wall
+@export var wall_height := 540.0
+@export var wall_width := 40.0     # thickness of the wall
 const SEGMENTS := 8                   # number of stacked segments
 
 # --- Critical (green) segments ---
