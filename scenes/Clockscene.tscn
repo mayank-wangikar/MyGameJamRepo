@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ce5afrtb8joea"]
+
+[node name="Clockscene" type="Node2D" unique_id=650688189]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1414918025]
+offset_left = 42.0
+offset_top = 482.0
+offset_right = 365.0
+offset_bottom = 522.0
+text = "DAY/LEVEL INFO"
+
+[node name="Label" type="Label" parent="." unique_id=909105732]
+offset_left = 423.77914
+offset_top = 172.12796
+offset_right = 463.77914
+offset_bottom = 195.12796
+text = "clock"

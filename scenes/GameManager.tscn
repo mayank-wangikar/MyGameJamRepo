@@ -1,11 +1,16 @@
 [gd_scene format=3 uid="uid://d1lp4cquf24u8"]
 
-[ext_resource type="Script" uid="uid://c85vqyhkjjwxh" path="res://scripts/game_manager.gd" id="1_3dus2"]
+[ext_resource type="Script" uid="uid://d344c1yy1xxdv" path="res://scripts/game_manager.gd" id="1_3dus2"]
 [ext_resource type="PackedScene" uid="uid://i6hfdnwnet4r" path="res://scenes/typing_game.tscn" id="1_4dhvd"]
 [ext_resource type="PackedScene" uid="uid://rbsfjr1c38dd" path="res://scenes/launch.tscn" id="2_3dus2"]
-[ext_resource type="Script" uid="uid://cuawo7wd45flh" path="res://scripts/mouse.gd" id="4_3dus2"]
+[ext_resource type="Texture2D" uid="uid://c7wm2tebjph58" path="res://assets/art/Window_final_chasm.png" id="3_rtub8"]
+[ext_resource type="Script" uid="uid://klxrgldulkyk" path="res://scripts/mouse.gd" id="4_3dus2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg7te"]
+bg_color = Color(0.19607843, 0.19215687, 0.23137255, 1)
 
 [node name="GameManager" type="Node2D" unique_id=1972943202]
+position = Vector2(480, 270)
 script = ExtResource("1_3dus2")
 
 [node name="TypingGame" parent="." unique_id=889836055 instance=ExtResource("1_4dhvd")]
@@ -18,9 +23,21 @@ grow_horizontal = 1
 grow_vertical = 1
 pivot_offset = Vector2(521, -238)
 
+[node name="WindowFinalChasm" type="Sprite2D" parent="." unique_id=2029211891]
+position = Vector2(-8, 162)
+scale = Vector2(2, 2)
+texture = ExtResource("3_rtub8")
+
 [node name="Launch" parent="." unique_id=1448617343 instance=ExtResource("2_3dus2")]
-position = Vector2(480, 350)
 
 [node name="Mouse" type="Node2D" parent="." unique_id=12523413]
 position = Vector2(480, 472)
 script = ExtResource("4_3dus2")
+
+[node name="Panel" type="Panel" parent="." unique_id=1988879643]
+z_index = -1000
+offset_left = -456.0
+offset_top = -110.0
+offset_right = 504.0
+offset_bottom = 430.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jg7te")
