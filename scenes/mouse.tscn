@@ -1,6 +1,32 @@
 [gd_scene format=3 uid="uid://d4kuop2lu8xgl"]
 
-[ext_resource type="Script" uid="uid://cuawo7wd45flh" path="res://scripts/mouse.gd" id="1_5v7j2"]
+[ext_resource type="Texture2D" uid="uid://b167lshvvmjvb" path="res://assets/art/mouse_color1.png" id="1_iog6k"]
+[ext_resource type="Texture2D" uid="uid://dbqv0hjkknokq" path="res://assets/art/mouse_color2.png" id="2_dexx5"]
+[ext_resource type="Texture2D" uid="uid://bqpdt15gfjp8o" path="res://assets/art/mouse_color3.png" id="3_j7mu1"]
 
-[node name="Mouse" type="Node2D" unique_id=1036349004]
-script = ExtResource("1_5v7j2")
+[sub_resource type="SpriteFrames" id="SpriteFrames_yockl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_iog6k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dexx5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j7mu1")
+}],
+"loop": true,
+"name": &"crank",
+"speed": 12.0
+}]
+
+[node name="Mouse" type="Node2D" unique_id=723634625]
+
+[node name="Mouse" type="AnimatedSprite2D" parent="." unique_id=1568268935]
+position = Vector2(0, 1)
+scale = Vector2(3.46875, 3.46875)
+sprite_frames = SubResource("SpriteFrames_yockl")
+animation = &"crank"
+frame = 2
+frame_progress = 0.17939347

@@ -1,9 +1,8 @@
 extends Control
 
-signal diamond_completed
+signal typing_phase_ended(energy_earned: int)
 signal energy_changed(value: int)
 
-@onready var timer: Timer = $Timer
 @onready var top_label: Label = $MarginContainer/VBoxContainer/DiamondContainer/TopLabel
 @onready var left_label: Label = $MarginContainer/VBoxContainer/DiamondContainer/LeftLabel
 @onready var right_label: Label = $MarginContainer/VBoxContainer/DiamondContainer/RightLabel
@@ -27,13 +26,11 @@ var current_index: int = 0
 var time_remaining: float = ROUND_DURATION
 var energy_points: int = 0
 var is_active: bool = false
+var _timer_done: bool = false
 
 func _ready() -> void:
 	randomize()
-	timer.wait_time = ROUND_DURATION
-	timer.one_shot = true
-	timer.timeout.connect(_on_timer_timeout)
-	timer.start()
+	is_active = true
 	_generate_new_target()
 
 func _process(delta: float) -> void:
@@ -41,8 +38,10 @@ func _process(delta: float) -> void:
 		return
 	time_remaining = max(0.0, time_remaining - delta)
 	time_label.text = "Time: %d s" % ceil(time_remaining)
-	if time_remaining <= 0.0:
-		_on_timer_timeout()
+	if time_remaining <= 0.0 and not _timer_done:
+		_timer_done = true
+		is_active = false
+		typing_phase_ended.emit(energy_points)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_active:
@@ -63,24 +62,16 @@ func _handle_key_press(pressed_char: String) -> void:
 		current_index += 1
 	_update_diamond_highlight()
 	if current_index >= target_letters.size():
-		_award_energy_for_cycle()
-		diamond_completed.emit()
-		_generate_new_target()
-
-func _award_energy_for_cycle() -> void:
-	energy_points = int(min(100, energy_points + ENERGY_PER_CYCLE))
-	energy_changed.emit(energy_points)
-
-func _on_timer_timeout() -> void:
-	if is_active:
+		energy_points = int(min(100, energy_points + ENERGY_PER_CYCLE))
 		energy_changed.emit(energy_points)
+		_generate_new_target()
 
 func reset_for_new_typing_phase() -> void:
 	energy_points = 0
 	current_index = 0
 	time_remaining = ROUND_DURATION
-	timer.wait_time = ROUND_DURATION
-	timer.start()
+	_timer_done = false
+	is_active = true
 	_generate_new_target()
 
 func _generate_new_target() -> void:
