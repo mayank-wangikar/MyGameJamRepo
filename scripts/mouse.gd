@@ -1,12 +1,15 @@
 extends Node2D
+
 var _tween: Tween = null
 const MOUSE_SIZE := 18.0
 var attached_to_wheel: bool = false
 var wheel_node: Node2D = null
+var _start_position: Vector2  # ← stores wherever the mouse begins
 
 @onready var _sprite: AnimatedSprite2D = $Mouse
 
 func _ready() -> void:
+	_start_position = position  # ← capture starting position on scene load
 	queue_redraw()
 
 func _process(_delta: float) -> void:
@@ -17,14 +20,13 @@ func _process(_delta: float) -> void:
 func go_typing() -> void:
 	attached_to_wheel = false
 	wheel_node = null
-	_move_to(Vector2(0, 0))
-	_sprite.play("crank")  # resume animation during typing
+	_sprite.play("crank")
+	_move_to(_start_position)  # ← snap back to starting position
 
 func go_shooting(wheel: Node2D) -> void:
 	attached_to_wheel = true
 	wheel_node = wheel
-	_sprite.stop()  # pause animation when on the wheel
-	# Animation keeps playing here too
+	_sprite.stop()
 
 func _move_to(target: Vector2) -> void:
 	if _tween:

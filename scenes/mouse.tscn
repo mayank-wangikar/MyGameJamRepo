@@ -24,8 +24,8 @@ animations = [{
 [node name="Mouse" type="Node2D" unique_id=723634625]
 
 [node name="Mouse" type="AnimatedSprite2D" parent="." unique_id=1568268935]
-position = Vector2(0, 1)
-scale = Vector2(3.46875, 3.46875)
+position = Vector2(-1, 2)
+scale = Vector2(1.734375, 1.734375)
 sprite_frames = SubResource("SpriteFrames_yockl")
 animation = &"crank"
 frame = 2
