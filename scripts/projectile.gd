@@ -9,7 +9,6 @@ var previous_position: Vector2
 func _ready() -> void:
 	add_to_group("projectile")
 
-
 func launch(direction: Vector2, charge: float) -> void:
 	velocity = direction.normalized() * SPEED
 	power = charge
@@ -32,15 +31,13 @@ func _process(delta: float) -> void:
 					game_manager._check_win_condition()
 			else:
 				print("Hit the wall, but missed the green zone.")
-			queue_free()
 			return
 
 	if not get_viewport_rect().grow(400).has_point(global_position):
 		print("Despawned off-screen at: ", global_position)
-		queue_free()
 
-	if not get_viewport_rect().grow(400).has_point(global_position):
-		queue_free()
+
+
 
 
 func _crossed_wall(wall: Node2D) -> bool:

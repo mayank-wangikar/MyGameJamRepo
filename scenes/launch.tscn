@@ -76,7 +76,7 @@ animations = [{
 "texture": ExtResource("18_v6qw1")
 }],
 "loop": true,
-"name": &"default",
+"name": &"gearrun",
 "speed": 5.0
 }]
 
@@ -103,22 +103,22 @@ script = ExtResource("4_hfj2o")
 position = Vector2(109.99997, -103)
 scale = Vector2(4.846076, 4.846076)
 sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
 
 [node name="g3" type="AnimatedSprite2D" parent="RightWall" unique_id=1737149990]
 position = Vector2(26, 19)
 scale = Vector2(2.2924, 2.2924)
 sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
 
 [node name="g2" type="AnimatedSprite2D" parent="RightWall" unique_id=173203789]
 position = Vector2(-41, 268)
 scale = Vector2(4.543749, 4.543749)
 sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
 
 [node name="g1" type="AnimatedSprite2D" parent="RightWall" unique_id=1274226042]
 position = Vector2(127, 152)
 scale = Vector2(5.6104655, 5.6104655)
 sprite_frames = SubResource("SpriteFrames_ndxrj")
-
-[node name="LeftWall" type="Node2D" parent="." unique_id=1111163360]
-position = Vector2(-430, -75)
-script = ExtResource("4_hfj2o")
+animation = &"gearrun"
