@@ -1,6 +1,20 @@
 [gd_scene format=3 uid="uid://b5xmov3ilwllk"]
 
 [ext_resource type="Script" uid="uid://b5lvenv6cjsvf" path="res://scripts/projectile.gd" id="1_c8fcr"]
+[ext_resource type="Texture2D" uid="uid://bnxblei6cw2vh" path="res://assets/art/rotten_cheese.png" id="2_q3m7n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q3m7n"]
+radius = 26.076809
 
 [node name="Projectile" type="Node2D" unique_id=998128386]
 script = ExtResource("1_c8fcr")
+
+[node name="RottenCheese" type="Sprite2D" parent="." unique_id=80069433]
+position = Vector2(-1.9073486e-06, 0)
+scale = Vector2(1.3203126, 1.3819613)
+texture = ExtResource("2_q3m7n")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=850939217]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=356725292]
+shape = SubResource("CircleShape2D_q3m7n")

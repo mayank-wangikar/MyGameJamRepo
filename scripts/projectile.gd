@@ -6,6 +6,9 @@ const SPEED := 900.0
 
 var previous_position: Vector2
 
+func _ready() -> void:
+	add_to_group("projectile")
+
 
 func launch(direction: Vector2, charge: float) -> void:
 	velocity = direction.normalized() * SPEED
@@ -52,8 +55,3 @@ func _crossed_wall(wall: Node2D) -> bool:
 
 	var within_y: bool = abs(local_now.y) <= half_height
 	return crossed_x and within_y
-
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, 14.0, Color.YELLOW)
-	draw_circle(Vector2.ZERO, 14.0, Color.ORANGE, false, 3.0)

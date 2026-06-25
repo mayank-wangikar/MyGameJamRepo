@@ -2,17 +2,122 @@
 
 [ext_resource type="Script" uid="uid://k4h5mftspaw5" path="res://scripts/wheel.gd" id="1_jk8w3"]
 [ext_resource type="PackedScene" uid="uid://b5xmov3ilwllk" path="res://scenes/projectile.tscn" id="2_hfj2o"]
+[ext_resource type="Texture2D" uid="uid://vhmj6qd8xa6d" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 1 - Silver_00.png" id="3_ok7c1"]
+[ext_resource type="Texture2D" uid="uid://b0ev4jnid2poe" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 1 - Silver_01.png" id="4_0pvaj"]
 [ext_resource type="Script" uid="uid://cxu5bo1db6hbd" path="res://scripts/wall.gd" id="4_hfj2o"]
+[ext_resource type="Texture2D" uid="uid://bbftuhjrjh5yk" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 1 - Silver_02.png" id="5_jg5bl"]
+[ext_resource type="Texture2D" uid="uid://c7f1g2cyq72hk" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 1 - Silver_03.png" id="6_tnvdo"]
+[ext_resource type="Texture2D" uid="uid://51ip7e8x1p45" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 2 - Silver_00.png" id="7_o3lg4"]
+[ext_resource type="Texture2D" uid="uid://dub33qooc33i1" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 2 - Silver_01.png" id="8_7ytuc"]
+[ext_resource type="Texture2D" uid="uid://h4w0e1xnnuxo" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 2 - Silver_02.png" id="9_y6nno"]
+[ext_resource type="Texture2D" uid="uid://fuflirgnam42" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 2 - Silver_03.png" id="10_el3g5"]
+[ext_resource type="Texture2D" uid="uid://20474w2a8bcl" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 3 - Silver_00.png" id="12_el3g5"]
+[ext_resource type="Texture2D" uid="uid://dhhamchyljoom" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 3 - Silver_01.png" id="13_8ysbs"]
+[ext_resource type="Texture2D" uid="uid://cwfg3r3w8qk7" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 3 - Silver_02.png" id="14_lx7d5"]
+[ext_resource type="Texture2D" uid="uid://l61hswn8prds" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 3 - Silver_03.png" id="15_h4phr"]
+[ext_resource type="Texture2D" uid="uid://bobnfjgat6md2" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 4 - Silver_00.png" id="16_wxte5"]
+[ext_resource type="Texture2D" uid="uid://c6ofy24e2npnh" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 4 - Silver_01.png" id="17_bp378"]
+[ext_resource type="Texture2D" uid="uid://eh58aow1uatr" path="res://assets/art/Cog Wheels - Gears_color/Cog Wheels - Gears_color/Sprites/Silver Gear Wheels/Gear 4 - Silver_02.png" id="18_v6qw1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ysbs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ok7c1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0pvaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jg5bl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tnvdo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_o3lg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7ytuc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_y6nno")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_el3g5")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 15.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ndxrj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_el3g5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_8ysbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_lx7d5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_h4phr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_wxte5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_bp378")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_v6qw1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Launch" type="Node2D" unique_id=1448617343]
+position = Vector2(1, 0)
 
 [node name="wheel" type="Node2D" parent="." unique_id=828730126]
 script = ExtResource("1_jk8w3")
 projectile_scene = ExtResource("2_hfj2o")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="wheel" unique_id=1467397875]
+position = Vector2(-1, 1)
+scale = Vector2(4.0029073, 4.0029073)
+sprite_frames = SubResource("SpriteFrames_8ysbs")
+animation = &"spin"
+frame = 6
+frame_progress = 0.5325563
+
 [node name="RightWall" type="Node2D" parent="." unique_id=873534598]
-position = Vector2(430, -75)
+position = Vector2(250, -75)
 script = ExtResource("4_hfj2o")
+
+[node name="g4" type="AnimatedSprite2D" parent="RightWall" unique_id=2053673966]
+position = Vector2(109.99997, -103)
+scale = Vector2(4.846076, 4.846076)
+sprite_frames = SubResource("SpriteFrames_ndxrj")
+
+[node name="g3" type="AnimatedSprite2D" parent="RightWall" unique_id=1737149990]
+position = Vector2(26, 19)
+scale = Vector2(2.2924, 2.2924)
+sprite_frames = SubResource("SpriteFrames_ndxrj")
+
+[node name="g2" type="AnimatedSprite2D" parent="RightWall" unique_id=173203789]
+position = Vector2(-41, 268)
+scale = Vector2(4.543749, 4.543749)
+sprite_frames = SubResource("SpriteFrames_ndxrj")
+
+[node name="g1" type="AnimatedSprite2D" parent="RightWall" unique_id=1274226042]
+position = Vector2(127, 152)
+scale = Vector2(5.6104655, 5.6104655)
+sprite_frames = SubResource("SpriteFrames_ndxrj")
 
 [node name="LeftWall" type="Node2D" parent="." unique_id=1111163360]
 position = Vector2(-430, -75)

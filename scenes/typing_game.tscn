@@ -4,17 +4,12 @@
 
 [node name="TypingGame" type="Control" unique_id=889836055]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.43541667
+anchor_bottom = 0.42592594
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3dpo4")
 metadata/_edit_use_anchors_ = true
-
-[node name="Timer" type="Timer" parent="." unique_id=1577878925]
-wait_time = 30.0
-one_shot = true
 
 [node name="MarginContainer" type="Control" parent="." unique_id=760652824]
 layout_mode = 1
@@ -36,12 +31,14 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=821163162]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -73.0
-offset_bottom = 23.0
-grow_horizontal = 0
+anchors_preset = -1
+anchor_left = -0.38516745
+anchor_top = 1.0130434
+anchor_right = -0.38516745
+anchor_bottom = 1.0130434
+offset_top = -23.0
+offset_right = 73.0
+grow_vertical = 0
 text = "Time: 30s"
 metadata/_edit_use_anchors_ = true
 
