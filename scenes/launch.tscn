@@ -76,7 +76,7 @@ animations = [{
 "texture": ExtResource("18_v6qw1")
 }],
 "loop": true,
-"name": &"default",
+"name": &"gearrun",
 "speed": 5.0
 }]
 
@@ -99,26 +99,56 @@ frame_progress = 0.5325563
 position = Vector2(250, -75)
 script = ExtResource("4_hfj2o")
 
+[node name="g9" type="AnimatedSprite2D" parent="RightWall" unique_id=1376864212]
+position = Vector2(-646, 97)
+scale = Vector2(3.1391742, 3.1391742)
+sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
+
+[node name="g8" type="AnimatedSprite2D" parent="RightWall" unique_id=1268929521]
+position = Vector2(-317, -116)
+scale = Vector2(4.262322, 4.262322)
+sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
+
+[node name="g7" type="AnimatedSprite2D" parent="RightWall" unique_id=497739221]
+position = Vector2(-528, -69.99999)
+scale = Vector2(6.4963455, 6.4963455)
+sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
+
+[node name="g6" type="AnimatedSprite2D" parent="RightWall" unique_id=1621938252]
+position = Vector2(-164.99998, -95)
+scale = Vector2(2.829214, 2.829214)
+sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
+
+[node name="g5" type="AnimatedSprite2D" parent="RightWall" unique_id=1034470892]
+position = Vector2(-51.999985, -138)
+scale = Vector2(3.1618125, 3.1618125)
+sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
+
 [node name="g4" type="AnimatedSprite2D" parent="RightWall" unique_id=2053673966]
 position = Vector2(109.99997, -103)
 scale = Vector2(4.846076, 4.846076)
 sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
 
 [node name="g3" type="AnimatedSprite2D" parent="RightWall" unique_id=1737149990]
 position = Vector2(26, 19)
 scale = Vector2(2.2924, 2.2924)
 sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
 
 [node name="g2" type="AnimatedSprite2D" parent="RightWall" unique_id=173203789]
 position = Vector2(-41, 268)
 scale = Vector2(4.543749, 4.543749)
 sprite_frames = SubResource("SpriteFrames_ndxrj")
+animation = &"gearrun"
 
 [node name="g1" type="AnimatedSprite2D" parent="RightWall" unique_id=1274226042]
 position = Vector2(127, 152)
 scale = Vector2(5.6104655, 5.6104655)
 sprite_frames = SubResource("SpriteFrames_ndxrj")
-
-[node name="LeftWall" type="Node2D" parent="." unique_id=1111163360]
-position = Vector2(-430, -75)
-script = ExtResource("4_hfj2o")
+animation = &"gearrun"
