@@ -1,7 +1,142 @@
 [gd_scene format=3 uid="uid://d3aetwdl334mm"]
 
+[ext_resource type="Script" uid="uid://qtnks0tqgw4t" path="res://scenes/u_ioverlay.gd" id="1_ihjnd"]
+[ext_resource type="Texture2D" uid="uid://df3lhro6n5i67" path="res://assets/art/Icons/Lucid V1.2/PNG/Flat/16/Pause.png" id="2_ihjnd"]
+[ext_resource type="Texture2D" uid="uid://bnxblei6cw2vh" path="res://assets/art/rotten_cheese.png" id="3_jv66o"]
+[ext_resource type="Script" uid="uid://3p5dnivegiex" path="res://scenes/h_slider.gd" id="4_ue4rd"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_jppvw"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_5q5im"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="GDScript" id="GDScript_b4vhx"]
+script/source = "extends CheckButton
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_toggled(toggled_on: bool) -> void:
+	if toggled_on == true:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	pass # Replace with function body.
+"
+
 [node name="Control" type="Control" unique_id=2004591712]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 960.0
+offset_bottom = 544.0
+script = ExtResource("1_ihjnd")
+
+[node name="Button" type="Button" parent="." unique_id=1178413052]
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_icons/icon = ExtResource("2_ihjnd")
+icon_alignment = 1
+
+[node name="PauseScreen" type="Panel" parent="." unique_id=791464252]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -144.0
+offset_right = 224.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen" unique_id=956777654]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -51.5
+offset_right = 90.0
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseScreen/VBoxContainer" unique_id=1359394041]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="Music" type="RichTextLabel" parent="PauseScreen/VBoxContainer" unique_id=1167240988]
+layout_mode = 2
+text = "Music"
+fit_content = true
+
+[node name="MusicSlider" type="HSlider" parent="PauseScreen/VBoxContainer" unique_id=621585233]
+layout_mode = 2
+theme_override_icons/grabber = ExtResource("3_jv66o")
+theme_override_styles/slider = SubResource("StyleBoxLine_jppvw")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_5q5im")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("4_ue4rd")
+audio_bus_name = "Music"
+
+[node name="SFX" type="RichTextLabel" parent="PauseScreen/VBoxContainer" unique_id=373637531]
+layout_mode = 2
+text = "SFX"
+fit_content = true
+
+[node name="SFXSlider" type="HSlider" parent="PauseScreen/VBoxContainer" unique_id=1883220410]
+layout_mode = 2
+theme_override_icons/grabber = ExtResource("3_jv66o")
+theme_override_styles/slider = SubResource("StyleBoxLine_jppvw")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_5q5im")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("4_ue4rd")
+audio_bus_name = "SFX"
+
+[node name="FullScreen" type="CheckButton" parent="PauseScreen/VBoxContainer" unique_id=1544932064]
+layout_mode = 2
+button_pressed = true
+text = "Full Screen Mode"
+script = SubResource("GDScript_b4vhx")
+
+[node name="Button" type="Button" parent="PauseScreen/VBoxContainer" unique_id=1146612786]
+layout_mode = 2
+text = "Controls and Instructions"
+
+[node name="Back" type="Button" parent="PauseScreen/VBoxContainer" unique_id=1727359501]
+layout_mode = 2
+text = "Back to Game
+"
+
+[node name="Button2" type="Button" parent="PauseScreen/VBoxContainer" unique_id=1736897730]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2075279232]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="PauseScreen/VBoxContainer/MusicSlider" to="PauseScreen/VBoxContainer/MusicSlider" method="_on_value_changed"]
+[connection signal="value_changed" from="PauseScreen/VBoxContainer/SFXSlider" to="PauseScreen/VBoxContainer/SFXSlider" method="_on_value_changed"]
+[connection signal="toggled" from="PauseScreen/VBoxContainer/FullScreen" to="PauseScreen/VBoxContainer/FullScreen" method="_on_toggled"]

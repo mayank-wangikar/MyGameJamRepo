@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://d1lp4cquf24u8"]
 
-[ext_resource type="Script" uid="uid://c85vqyhkjjwxh" path="res://scripts/game_manager.gd" id="1_3dus2"]
+[ext_resource type="Script" uid="uid://d344c1yy1xxdv" path="res://scripts/game_manager.gd" id="1_3dus2"]
 [ext_resource type="PackedScene" uid="uid://i6hfdnwnet4r" path="res://scenes/typing_game.tscn" id="1_4dhvd"]
 [ext_resource type="PackedScene" uid="uid://rbsfjr1c38dd" path="res://scenes/launch.tscn" id="2_3dus2"]
 [ext_resource type="Texture2D" uid="uid://c7wm2tebjph58" path="res://assets/art/Window_final_chasm.png" id="3_rtub8"]
-[ext_resource type="Script" uid="uid://cuawo7wd45flh" path="res://scripts/mouse.gd" id="4_3dus2"]
+[ext_resource type="Script" uid="uid://klxrgldulkyk" path="res://scripts/mouse.gd" id="4_3dus2"]
 [ext_resource type="PackedScene" uid="uid://d4kuop2lu8xgl" path="res://scenes/mouse.tscn" id="5_rtub8"]
+[ext_resource type="PackedScene" uid="uid://d3aetwdl334mm" path="res://scenes/UIoverlay.tscn" id="7_mx40s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg7te"]
 bg_color = Color(0.19607843, 0.19215687, 0.23137255, 1)
@@ -28,8 +29,27 @@ script = ExtResource("4_3dus2")
 
 [node name="Panel" type="Panel" parent="." unique_id=1988879643]
 z_index = -1000
-offset_left = -569.0
-offset_top = -304.0
-offset_right = 583.0
-offset_bottom = 352.0
+offset_left = -480.0
+offset_top = -270.0
+offset_right = 480.0
+offset_bottom = 271.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_jg7te")
+
+[node name="Control" parent="." unique_id=2004591712 instance=ExtResource("7_mx40s")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -270.0
+offset_right = 480.0
+offset_bottom = 271.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control2" parent="." unique_id=1564440392 instance=ExtResource("7_mx40s")]
+offset_left = -480.0
+offset_top = -254.0
+offset_right = 480.0
+offset_bottom = 290.0
