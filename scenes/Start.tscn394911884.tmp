@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://cvbjbyyxv0y8b"]
+
+[ext_resource type="Script" uid="uid://vwtcoo5qvoal" path="res://scenes/start.gd" id="1_8t08e"]
+[ext_resource type="FontFile" uid="uid://bra1t3htrodk6" path="res://assets/font/FT88-Typeface/ft88/FT88-Serif.otf" id="1_h1lxu"]
+[ext_resource type="Texture2D" uid="uid://bnxblei6cw2vh" path="res://assets/art/rotten_cheese.png" id="2_lynlw"]
+[ext_resource type="Script" uid="uid://dnc86wguwbqu4" path="res://scenes/h_slider.gd" id="2_yx83k"]
+[ext_resource type="AudioStream" uid="uid://cji261kt4fton" path="res://assets/music/LVER.wav" id="3_lynlw"]
+[ext_resource type="Script" uid="uid://dahnge6xjhp8j" path="res://scenes/audio_stream_player_2d.gd" id="4_h1lxu"]
+
+[sub_resource type="Theme" id="Theme_fr6ov"]
+default_font = ExtResource("1_h1lxu")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_d48hf"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_h1lxu"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="GDScript" id="GDScript_yx83k"]
+script/source = "extends CheckButton
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_toggled(toggled_on: bool) -> void:
+	if toggled_on == true:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	pass # Replace with function body.
+"
+
+[node name="Control" type="Control" unique_id=1809262360]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_fr6ov")
+script = ExtResource("1_8t08e")
+
+[node name="Label" type="Label" parent="." unique_id=2088159824]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -11.5
+offset_right = 23.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "LOGO"
+
+[node name="Options" type="Panel" parent="." unique_id=1739841600]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.504
+anchor_right = 0.5
+anchor_bottom = 0.504
+offset_left = -160.0
+offset_top = -128.16
+offset_right = 160.0
+offset_bottom = 127.84
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options" unique_id=439879643]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -51.5
+offset_right = 90.0
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Options/VBoxContainer" unique_id=1337488451]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Options"
+horizontal_alignment = 1
+
+[node name="Music" type="RichTextLabel" parent="Options/VBoxContainer" unique_id=338756042]
+layout_mode = 2
+text = "Music"
+fit_content = true
+
+[node name="MusicSlider" type="HSlider" parent="Options/VBoxContainer" unique_id=410595963]
+layout_mode = 2
+theme_override_icons/grabber = ExtResource("2_lynlw")
+theme_override_styles/slider = SubResource("StyleBoxLine_d48hf")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_h1lxu")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("2_yx83k")
+audio_bus_name = "Music"
+
+[node name="SFX" type="RichTextLabel" parent="Options/VBoxContainer" unique_id=1252639819]
+layout_mode = 2
+text = "SFX"
+fit_content = true
+
+[node name="SFXSlider" type="HSlider" parent="Options/VBoxContainer" unique_id=1469506276]
+layout_mode = 2
+theme_override_icons/grabber = ExtResource("2_lynlw")
+theme_override_styles/slider = SubResource("StyleBoxLine_d48hf")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_h1lxu")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("2_yx83k")
+audio_bus_name = "SFX"
+
+[node name="FullScreen" type="CheckButton" parent="Options/VBoxContainer" unique_id=1747720815]
+layout_mode = 2
+button_pressed = true
+text = "Full Screen Mode"
+script = SubResource("GDScript_yx83k")
+
+[node name="Back" type="Button" parent="Options/VBoxContainer" unique_id=906825604]
+layout_mode = 2
+text = "Back		
+"
+
+[node name="MainButtons" type="VBoxContainer" parent="." unique_id=1135592807]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -83.5
+offset_bottom = 146.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="MainButtons" unique_id=1728143086]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Start
+"
+
+[node name="Controls" type="Button" parent="MainButtons" unique_id=678629330]
+layout_mode = 2
+text = "Controls
+"
+
+[node name="Options" type="Button" parent="MainButtons" unique_id=995843545]
+layout_mode = 2
+text = "Options
+"
+
+[node name="Credits" type="Button" parent="MainButtons" unique_id=612582917]
+layout_mode = 2
+text = "Credits
+"
+
+[node name="Quit" type="Button" parent="MainButtons" unique_id=1290181586]
+layout_mode = 2
+text = "Quit"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1767167311]
+stream = ExtResource("3_lynlw")
+autoplay = true
+bus = &"Music"
+script = ExtResource("4_h1lxu")
+
+[connection signal="value_changed" from="Options/VBoxContainer/MusicSlider" to="Options/VBoxContainer/MusicSlider" method="_on_value_changed"]
+[connection signal="value_changed" from="Options/VBoxContainer/SFXSlider" to="Options/VBoxContainer/SFXSlider" method="_on_value_changed"]
+[connection signal="toggled" from="Options/VBoxContainer/FullScreen" to="Options/VBoxContainer/FullScreen" method="_on_toggled"]
+[connection signal="pressed" from="Options/VBoxContainer/Back" to="." method="_ready"]
+[connection signal="pressed" from="MainButtons/Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainButtons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_button_pressed"]
