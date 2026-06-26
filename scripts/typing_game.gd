@@ -29,6 +29,13 @@ var is_active: bool = false
 var _timer_done: bool = false
 
 func _ready() -> void:
+	var bg = ColorRect.new()
+	bg.color = Color(0, 0, 0, 0.75)
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	bg.z_index = -1
+	add_child(bg)
+	move_child(bg, 0)
+	
 	randomize()
 	is_active = true
 	_generate_new_target()
