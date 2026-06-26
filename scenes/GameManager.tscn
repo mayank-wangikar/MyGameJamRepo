@@ -1,11 +1,12 @@
 [gd_scene format=4 uid="uid://d1lp4cquf24u8"]
 
-[ext_resource type="Script" uid="uid://d344c1yy1xxdv" path="res://scripts/game_manager.gd" id="1_3dus2"]
+[ext_resource type="Script" uid="uid://c85vqyhkjjwxh" path="res://scripts/game_manager.gd" id="1_3dus2"]
 [ext_resource type="PackedScene" uid="uid://i6hfdnwnet4r" path="res://scenes/typing_game.tscn" id="1_4dhvd"]
 [ext_resource type="PackedScene" uid="uid://rbsfjr1c38dd" path="res://scenes/launch.tscn" id="2_3dus2"]
 [ext_resource type="Texture2D" uid="uid://c7wm2tebjph58" path="res://assets/art/Window_final_chasm.png" id="3_rtub8"]
-[ext_resource type="Script" uid="uid://klxrgldulkyk" path="res://scripts/mouse.gd" id="4_3dus2"]
+[ext_resource type="Script" uid="uid://cuawo7wd45flh" path="res://scripts/mouse.gd" id="4_3dus2"]
 [ext_resource type="PackedScene" uid="uid://d4kuop2lu8xgl" path="res://scenes/mouse.tscn" id="5_rtub8"]
+[ext_resource type="Texture2D" uid="uid://dtueaoqw4f1f1" path="res://assets/art/TX Village Props.png" id="7_mx40s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg7te"]
 bg_color = Color(0.19607843, 0.19215687, 0.23137255, 1)
@@ -940,6 +941,7 @@ texture = ExtResource("7_mx40s")
 41:36/0 = 0
 46:36/0 = 0
 47:36/0 = 0
+50:36/0 = 0
 56:36/0 = 0
 57:36/0 = 0
 2:37/0 = 0
@@ -1320,7 +1322,6 @@ texture = ExtResource("7_mx40s")
 61:60/0 = 0
 62:60/0 = 0
 56:61/0 = 0
-50:36/0 = 0
 50:35/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_2chjq"]
@@ -1329,6 +1330,9 @@ sources/0 = SubResource("TileSetAtlasSource_2uts2")
 [node name="GameManager" type="Node2D" unique_id=1972943202]
 position = Vector2(480, 270)
 script = ExtResource("1_3dus2")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=757988291]
+position = Vector2(480, 270)
 
 [node name="WindowFinalChasm" type="Sprite2D" parent="." unique_id=2029211891]
 position = Vector2(-5, 1)
@@ -1339,9 +1343,20 @@ texture = ExtResource("3_rtub8")
 position = Vector2(0, 155)
 script = ExtResource("4_3dus2")
 
-[node name="TypingGame" parent="." unique_id=889836055 instance=ExtResource("1_4dhvd")]
-
 [node name="Launch" parent="." unique_id=1448617343 instance=ExtResource("2_3dus2")]
+position = Vector2(0, 0)
+
+[node name="TypingGame" parent="." unique_id=889836055 instance=ExtResource("1_4dhvd")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -100.0
+offset_top = 130.0
+offset_right = -100.0
+offset_bottom = 130.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.25, 0.25)
 
 [node name="Panel" type="Panel" parent="." unique_id=1988879643]
 z_index = -1000
@@ -1351,27 +1366,21 @@ offset_right = 480.0
 offset_bottom = 271.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_jg7te")
 
-<<<<<<< HEAD
-[node name="Control" parent="." unique_id=2004591712 instance=ExtResource("7_mx40s")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -480.0
-offset_top = -270.0
-offset_right = 480.0
-offset_bottom = 271.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Control2" parent="." unique_id=1564440392 instance=ExtResource("7_mx40s")]
-offset_left = -480.0
-offset_top = -254.0
-offset_right = 480.0
-offset_bottom = 290.0
-=======
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1391527112]
 tile_map_data = PackedByteArray("AADz/wsAAAAdACcAAAD0/wsAAAAaACcAAAD1/wsAAAAbACcAAAD2/wsAAAAcACcAAAD3/wsAAAAdACcAAAD4/wsAAAAaACcAAAD5/wsAAAAbACcAAAD6/wsAAAAcACcAAAD7/wsAAAAdACcAAAD8/wsAAAAaACcAAAD9/wsAAAAbACcAAAD+/wsAAAAcACcAAAD//wsAAAAdACcAAAAAAAsAAAAaACcAAAABAAsAAAAbACcAAAACAAsAAAAcACcAAAADAAsAAAAdACcAAAAEAAsAAAAbACcAAAAFAAsAAAAcACcAAAAGAAsAAAAdACcAAADw/wsAAAAaACcAAADx/wsAAAAbACcAAADy/wsAAAAcACcAAADv/wsAAAAdACcAAADv/wwAAAAFABsAAADw/wwAAAAGABsAAADu/wsAAAAcACcAAADt/wsAAAAbACcAAADs/wsAAAAaACcAAADr/wsAAAAdACcAAADq/wsAAAAcACcAAADp/wsAAAAbACcAAADo/wsAAAAaACcAAADn/wsAAAAdACcAAADm/wsAAAAcACcAAADl/wsAAAAbACcAAADk/wsAAAAaACcAAADj/wsAAAAdACcAAADi/wsAAAAcACcAAAAEAAwAAAAbACgAAAAEAA0AAAAbACkAAAAEAA4AAAAbACkAAAAFAAwAAAAcACgAAAAFAA0AAAAcACkAAAAFAA4AAAAcACkAAAABAAwAAAAbACgAAAABAA0AAAAbACkAAAABAA4AAAAbACkAAAACAAwAAAAcACgAAAACAA0AAAAcACkAAAACAA4AAAAcACkAAAD9/wwAAAAbACgAAAD9/w0AAAAbACkAAAD9/w4AAAAbACkAAAD+/wwAAAAcACgAAAD+/w0AAAAcACkAAAD+/w4AAAAcACkAAAD5/wwAAAAbACgAAAD5/w0AAAAbACkAAAD5/w4AAAAbACkAAAD6/wwAAAAcACgAAAD6/w0AAAAcACkAAAD6/w4AAAAcACkAAAD1/wwAAAAbACgAAAD1/w0AAAAbACkAAAD1/w4AAAAbACkAAAD2/wwAAAAcACgAAAD2/w0AAAAcACkAAAD2/w4AAAAcACkAAADx/wwAAAAbACgAAADx/w0AAAAbACkAAADx/w4AAAAbACkAAADy/wwAAAAcACgAAADy/w0AAAAcACkAAADy/w4AAAAcACkAAADt/wwAAAAbACgAAADt/w0AAAAbACkAAADt/w4AAAAbACkAAADu/wwAAAAcACgAAADu/w0AAAAcACkAAADu/w4AAAAcACkAAADp/wwAAAAbACgAAADp/w0AAAAbACkAAADp/w4AAAAbACkAAADq/wwAAAAcACgAAADq/w0AAAAcACkAAADq/w4AAAAcACkAAADl/wwAAAAbACgAAADl/w0AAAAbACkAAADl/w4AAAAbACkAAADm/wwAAAAcACgAAADm/w0AAAAcACkAAADm/w4AAAAcACkAAADg/wsAAAAaACcAAADh/wsAAAAbACcAAADh/wwAAAAbACgAAADh/w0AAAAbACkAAADh/w4AAAAbACkAAADi/wwAAAAcACgAAADi/w0AAAAcACkAAADi/w4AAAAcACkAAADh/w8AAAAbACkAAADi/w8AAAAcACkAAADh/xAAAAAbACkAAADi/xAAAAAcACkAAADh/xEAAAAbACkAAADi/xEAAAAcACkAAADh/xIAAAAbACkAAADh/xMAAAAbACkAAADi/xIAAAAcACkAAADi/xMAAAAcACkAAADh/xQAAAAbACoAAADh/xUAAAAbACoAAADi/xQAAAAcACoAAADi/xUAAAAcACoAAADl/w8AAAAbACkAAADm/w8AAAAcACkAAADl/xAAAAAbACkAAADm/xAAAAAcACkAAADl/xEAAAAbACkAAADm/xEAAAAcACkAAADl/xIAAAAbACkAAADm/xIAAAAcACkAAADl/xMAAAAbACkAAADm/xMAAAAcACkAAADl/xQAAAAbACkAAADm/xQAAAAcACkAAADl/xUAAAAbACoAAADm/xUAAAAcACoAAADp/w8AAAAbACkAAADq/w8AAAAcACkAAADp/xAAAAAbACkAAADq/xAAAAAcACkAAADp/xEAAAAbACkAAADq/xEAAAAcACkAAADt/w8AAAAbACkAAADu/w8AAAAcACkAAADt/xAAAAAbACkAAADu/xAAAAAcACkAAADt/xEAAAAbACkAAADu/xEAAAAcACkAAADx/w8AAAAbACkAAADy/w8AAAAcACkAAADx/xAAAAAbACkAAADy/xAAAAAcACkAAADx/xEAAAAbACkAAADy/xEAAAAcACkAAADt/xIAAAAbACoAAADu/xIAAAAcACoAAADp/xIAAAAbACoAAADq/xIAAAAcACoAAADx/xIAAAAbACoAAADy/xIAAAAcACoAAAD1/w8AAAAbACkAAAD2/w8AAAAcACkAAAD1/xAAAAAbACkAAAD2/xAAAAAcACkAAAD1/xEAAAAbACkAAAD2/xEAAAAcACkAAAD1/xIAAAAbACoAAAD2/xIAAAAcACoAAAD5/w8AAAAbACkAAAD6/w8AAAAcACkAAAD5/xAAAAAbACkAAAD6/xAAAAAcACkAAAD5/xEAAAAbACkAAAD6/xEAAAAcACkAAAD5/xIAAAAbACoAAAD6/xIAAAAcACoAAAD9/w8AAAAbACkAAAD+/w8AAAAcACkAAAD9/xAAAAAbACkAAAD+/xAAAAAcACkAAAD9/xEAAAAbACkAAAD+/xEAAAAcACkAAAD9/xIAAAAbACoAAAD+/xIAAAAcACoAAAABAA8AAAAbACkAAAACAA8AAAAcACkAAAABABAAAAAbACkAAAACABAAAAAcACkAAAABABEAAAAbACkAAAACABEAAAAcACkAAAABABIAAAAbACoAAAACABIAAAAcACoAAAAEAA8AAAAbACkAAAAFAA8AAAAcACkAAAAEABAAAAAbACkAAAAFABAAAAAcACkAAAAEABEAAAAbACkAAAAFABEAAAAcACkAAAAEABIAAAAbACoAAAAFABIAAAAcACoAAAATAAsAAAAbACcAAAATAAwAAAAbACgAAAAUAAsAAAAcACcAAAAUAAwAAAAcACgAAAAZAAsAAAAbACcAAAAZAAwAAAAbACgAAAAaAAsAAAAcACcAAAAaAAwAAAAcACgAAAAbAAsAAAAbACcAAAAbAAwAAAAbACgAAAAcAAsAAAAcACcAAAAcAAwAAAAcACgAAAAdAAsAAAAbACcAAAAdAAwAAAAbACgAAAAeAAsAAAAcACcAAAAeAAwAAAAcACgAAAAVAAsAAAAbACcAAAAVAAwAAAAbACgAAAAWAAsAAAAcACcAAAAWAAwAAAAcACgAAAATAA0AAAAbACkAAAATAA4AAAAbACkAAAAUAA0AAAAcACkAAAAUAA4AAAAcACkAAAATAA8AAAAbACkAAAATABAAAAAbACkAAAAUAA8AAAAcACkAAAAUABAAAAAcACkAAAATABEAAAAbACkAAAAUABEAAAAcACkAAAAVAA0AAAAbACkAAAAVAA4AAAAbACkAAAAWAA0AAAAcACkAAAAWAA4AAAAcACkAAAAVAA8AAAAbACkAAAAWAA8AAAAcACkAAAAVABAAAAAbACkAAAAWABAAAAAcACkAAAAVABEAAAAbACkAAAAWABEAAAAcACkAAAAZAA0AAAAbACkAAAAZAA4AAAAbACkAAAAaAA0AAAAcACkAAAAaAA4AAAAcACkAAAAZAA8AAAAbACkAAAAaAA8AAAAcACkAAAAZABAAAAAbACkAAAAZABEAAAAbACkAAAAaABAAAAAcACkAAAAaABEAAAAcACkAAAAbAA0AAAAbACkAAAAbAA4AAAAbACkAAAAcAA0AAAAcACkAAAAcAA4AAAAcACkAAAAbAA8AAAAbACkAAAAcAA8AAAAcACkAAAAbABAAAAAbACkAAAAcABAAAAAcACkAAAAbABEAAAAbACkAAAAcABEAAAAcACkAAAAdAA0AAAAbACkAAAAdAA4AAAAbACkAAAAeAA0AAAAcACkAAAAeAA4AAAAcACkAAAAdAA8AAAAbACkAAAAeAA8AAAAcACkAAAAdABAAAAAbACkAAAAeABAAAAAcACkAAAAdABEAAAAbACkAAAAeABEAAAAcACkAAAATABIAAAAbACoAAAAUABIAAAAcACoAAAAVABIAAAAbACoAAAAWABIAAAAcACoAAAAZABIAAAAbACoAAAAaABIAAAAcACoAAAAbABIAAAAbACoAAAAcABIAAAAcACoAAAAdABIAAAAbACoAAAAeABIAAAAcACoAAADZ/w0AAAAqAC0AAADZ/w4AAAAqAC4AAADa/w0AAAArAC0AAADa/w4AAAArAC4AAADb/wwAAAAsACwAAADb/w0AAAAsAC0AAADb/w4AAAAsAC4AAADc/wwAAAAtACwAAADc/w0AAAAtAC0AAADd/wsAAAAuACsAAADd/wwAAAAuACwAAADd/w0AAAAuAC0AAADd/w4AAAAuAC4AAADe/wsAAAAvACsAAADe/wwAAAAvACwAAADe/w0AAAAvAC0AAADe/w4AAAAvAC4AAADf/wsAAAAwACsAAADf/wwAAAAwACwAAADf/w0AAAAwAC0AAADf/w4AAAAwAC4AAADh/wkAAAAmAAYAAADi/wkAAAAnAAYAAADj/wkAAAAkAAYAAADj/woAAAAkAAcAAADk/wkAAAAlAAYAAADk/woAAAAlAAcAAADl/wkAAAAkAAYAAADl/woAAAAkAAcAAADm/wkAAAAlAAYAAADm/woAAAAlAAcAAADn/wkAAAAmAAYAAADn/woAAAAmAAcAAADo/wkAAAAnAAYAAADo/woAAAAnAAcAAADp/wgAAAAYAAsAAADp/wkAAAAYAAwAAADp/woAAAAYAA0AAADq/wkAAAAZAAwAAADq/woAAAAZAA0AAADs/wgAAAAUAAsAAADs/wkAAAAUAAwAAADs/woAAAAUAA0AAADt/wgAAAAVAAsAAADt/wkAAAAVAAwAAADu/wgAAAAWAAsAAADu/wkAAAAWAAwAAADv/wgAAAAXAAsAAADv/wkAAAAXAAwAAADv/woAAAAXAA0AAADx/wkAAAAyAAoAAADx/woAAAAyAAsAAADy/wkAAAAzAAoAAADy/woAAAAzAAsAAADh/woAAAAmAAcAAADi/woAAAAnAAcAAAA=")
 tile_set = SubResource("TileSet_2chjq")
->>>>>>> 73ade9026414c4c663cdb0d6569801541553daf4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=454476918]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1011515232]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=536944809]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1941612073]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1287118330]
+layout_mode = 2

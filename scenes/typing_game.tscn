@@ -11,46 +11,21 @@ grow_vertical = 2
 script = ExtResource("1_3dpo4")
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="Control" parent="." unique_id=760652824]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1303871168]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="VBoxContainer" type="Control" parent="MarginContainer" unique_id=1003091347]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1737115331]
+layout_mode = 2
 
 [node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=821163162]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.38516745
-anchor_top = 1.0130434
-anchor_right = -0.38516745
-anchor_bottom = 1.0130434
-offset_top = -23.0
-offset_right = 73.0
-grow_vertical = 0
+layout_mode = 2
 text = "Time: 30s"
 metadata/_edit_use_anchors_ = true
 
 [node name="DiamondContainer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=833528137]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="TopLabel" type="Label" parent="MarginContainer/VBoxContainer/DiamondContainer" unique_id=25659543]
