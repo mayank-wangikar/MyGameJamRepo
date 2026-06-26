@@ -1,17 +1,54 @@
 [gd_scene format=3 uid="uid://ce5afrtb8joea"]
 
-[node name="Clockscene" type="Node2D" unique_id=650688189]
+[ext_resource type="FontFile" uid="uid://b00y6ppax8il1" path="res://assets/font/Silver.ttf" id="1_j2gix"]
+[ext_resource type="Script" uid="uid://dp363o0evtgko" path="res://scenes/clockscene.gd" id="1_mytod"]
+[ext_resource type="AudioStream" uid="uid://dbpo5xyt2p7dc" path="res://assets/music/SFX/SweetSounds_SFX/WAV/Click.wav" id="3_8dvlu"]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1414918025]
-offset_left = 42.0
-offset_top = 482.0
-offset_right = 365.0
-offset_bottom = 522.0
-text = "DAY/LEVEL INFO"
+[node name="Clockscene" type="Control" unique_id=86573697]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mytod")
 
 [node name="Label" type="Label" parent="." unique_id=909105732]
+layout_mode = 0
 offset_left = 423.77914
 offset_top = 172.12796
 offset_right = 463.77914
 offset_bottom = 195.12796
 text = "clock"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1818704516]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -108.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="content" type="RichTextLabel" parent="NinePatchRect" unique_id=1414918025]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -416.0
+offset_top = -20.0
+offset_right = 416.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_j2gix")
+
+[node name="TypeTimer" type="Timer" parent="." unique_id=648509008]
+
+[node name="ConfirmSFX" type="AudioStreamPlayer" parent="." unique_id=251063611]
+stream = ExtResource("3_8dvlu")
+
+[connection signal="timeout" from="TypeTimer" to="." method="_on_type_timer_timeout"]
