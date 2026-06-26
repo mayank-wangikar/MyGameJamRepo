@@ -6,6 +6,7 @@ extends Node2D
 @onready var camera: Camera2D = $Camera2D
 @onready var bar_label: Label = $CanvasLayer/MarginContainer/VBoxContainer/Label
 @onready var bar: ProgressBar = $CanvasLayer/MarginContainer/VBoxContainer/ProgressBar
+@onready var roll: Node2D = $Roll
 
 const DRAIN_PER_SECOND: float = 10.0
 const PLATFORM_POS := Vector2(480, 490)
@@ -28,6 +29,7 @@ func _ready() -> void:
 	bar.min_value = 0.0
 	bar.max_value = 100.0
 	_enter_typing_phase()
+
 
 func _process(delta: float) -> void:
 	camera.zoom = camera.zoom.lerp(_target_zoom, ZOOM_SPEED * delta)
@@ -62,6 +64,7 @@ func _enter_typing_phase() -> void:
 	await get_tree().create_timer(0.5).timeout
 	_target_zoom = ZOOM_IN
 	_target_camera_pos = mouse.position
+	roll.get_node("Roller").play("roller")
 	await get_tree().process_frame
 	typing_game.visible = true
 	typing_game.is_active = true
@@ -76,6 +79,7 @@ func _enter_shooting_phase(energy_earned: int) -> void:
 	mouse.go_shooting(wheel)
 	_target_zoom = ZOOM_OUT
 	_target_camera_pos = Vector2(0, 0)
+	roll.get_node("Roller").stop()
 
 func _draw() -> void:
 	draw_rect(

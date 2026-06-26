@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bqfbbuyi2furi"]
+
+[ext_resource type="Texture2D" uid="uid://cbysvyil2mp0g" path="res://assets/art/rotatewheel_1.png" id="1_v48tw"]
+[ext_resource type="Texture2D" uid="uid://dwqkc3t0dmas3" path="res://assets/art/rotatewheel_2.png" id="2_oxuqx"]
+[ext_resource type="Texture2D" uid="uid://1ag1ib16hs7s" path="res://assets/art/rotatewheel_3.png" id="3_sn0d1"]
+[ext_resource type="Texture2D" uid="uid://gkvn6qf72lf0" path="res://assets/art/rotatewheel_4.png" id="4_0iuom"]
+[ext_resource type="Texture2D" uid="uid://dovbw44r6wtfy" path="res://assets/art/rotatewheel_5.png" id="5_1rgyp"]
+[ext_resource type="Texture2D" uid="uid://cl05dl0fmnbps" path="res://assets/art/rotatewheel_6.png" id="6_h3sk0"]
+[ext_resource type="Texture2D" uid="uid://cn8uriwmtcf3k" path="res://assets/art/rotatewheel_7.png" id="7_bxxp5"]
+[ext_resource type="Texture2D" uid="uid://dkbk821edahlr" path="res://assets/art/rotatewheel_8.png" id="8_sb48h"]
+[ext_resource type="Texture2D" uid="uid://bfb2igrhovy1s" path="res://assets/art/rotatewheel_9.png" id="9_aefbd"]
+[ext_resource type="Texture2D" uid="uid://bty55e4165r0f" path="res://assets/art/rotatewheel_10.png" id="10_8rc2d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3qser"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_v48tw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oxuqx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sn0d1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0iuom")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1rgyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_h3sk0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bxxp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sb48h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_aefbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8rc2d")
+}],
+"loop": true,
+"name": &"roller",
+"speed": 5.0
+}]
+
+[node name="Roll" type="Node2D" unique_id=647591223]
+
+[node name="Roller" type="AnimatedSprite2D" parent="." unique_id=476279345]
+sprite_frames = SubResource("SpriteFrames_3qser")
+animation = &"roller"
+frame = 8
+frame_progress = 0.30746013

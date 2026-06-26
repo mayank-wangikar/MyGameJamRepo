@@ -1,7 +1,7 @@
 extends Control
-
 signal typing_phase_ended(energy_earned: int)
 signal energy_changed(value: int)
+signal typing_speed_changed(normalized: float)
 
 @onready var top_label: Label = $MarginContainer/VBoxContainer/DiamondContainer/TopLabel
 @onready var left_label: Label = $MarginContainer/VBoxContainer/DiamondContainer/LeftLabel
@@ -11,7 +11,6 @@ signal energy_changed(value: int)
 
 const ROUND_DURATION: float = 15.0
 const ENERGY_PER_CYCLE: int = 10
-
 const DIAMOND_CLUSTERS: Array[Array] = [
 	["E", "S", "D", "X"],
 	["R", "D", "F", "C"],
@@ -28,6 +27,10 @@ var energy_points: int = 0
 var is_active: bool = false
 var _timer_done: bool = false
 
+# Typing rate tracking
+var _last_keypress_time: float = 0.0
+const IDLE_THRESHOLD: float = 1.5  # seconds without input = idle
+
 func _ready() -> void:
 	var bg = ColorRect.new()
 	bg.color = Color(0, 0, 0, 0.75)
@@ -35,7 +38,6 @@ func _ready() -> void:
 	bg.z_index = -1
 	add_child(bg)
 	move_child(bg, 0)
-	
 	randomize()
 	is_active = true
 	_generate_new_target()
@@ -45,9 +47,16 @@ func _process(delta: float) -> void:
 		return
 	time_remaining = max(0.0, time_remaining - delta)
 	time_label.text = "Time: %d s" % ceil(time_remaining)
+
+	# If player hasn't typed in IDLE_THRESHOLD seconds, stop the wheel
+	var time_since_last_key := Time.get_ticks_msec() / 1000.0 - _last_keypress_time
+	if time_since_last_key >= IDLE_THRESHOLD:
+		typing_speed_changed.emit(0.0)
+
 	if time_remaining <= 0.0 and not _timer_done:
 		_timer_done = true
 		is_active = false
+		typing_speed_changed.emit(0.0)
 		typing_phase_ended.emit(energy_points)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -67,6 +76,10 @@ func _handle_key_press(pressed_char: String) -> void:
 	var expected_char: String = target_letters[current_index]
 	if pressed_char == expected_char:
 		current_index += 1
+		_last_keypress_time = Time.get_ticks_msec() / 1000.0
+		# Speed = how much of the cluster is done, scaled to 0.0-1.0
+		var progress := float(current_index) / float(target_letters.size())
+		typing_speed_changed.emit(progress)
 	_update_diamond_highlight()
 	if current_index >= target_letters.size():
 		energy_points = int(min(100, energy_points + ENERGY_PER_CYCLE))
@@ -79,6 +92,7 @@ func reset_for_new_typing_phase() -> void:
 	time_remaining = ROUND_DURATION
 	_timer_done = false
 	is_active = true
+	_last_keypress_time = Time.get_ticks_msec() / 1000.0
 	_generate_new_target()
 
 func _generate_new_target() -> void:

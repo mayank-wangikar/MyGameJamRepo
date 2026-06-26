@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cuawo7wd45flh" path="res://scripts/mouse.gd" id="4_3dus2"]
 [ext_resource type="PackedScene" uid="uid://d4kuop2lu8xgl" path="res://scenes/mouse.tscn" id="5_rtub8"]
 [ext_resource type="Texture2D" uid="uid://dtueaoqw4f1f1" path="res://assets/art/TX Village Props.png" id="7_mx40s"]
+[ext_resource type="PackedScene" uid="uid://bqfbbuyi2furi" path="res://scenes/roll.tscn" id="8_2uts2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg7te"]
 bg_color = Color(0.19607843, 0.19215687, 0.23137255, 1)
@@ -1384,3 +1385,6 @@ layout_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1287118330]
 layout_mode = 2
+
+[node name="Roll" parent="." unique_id=647591223 instance=ExtResource("8_2uts2")]
+position = Vector2(-34, 160)
