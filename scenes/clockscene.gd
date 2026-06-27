@@ -8,9 +8,10 @@ extends Control
 var is_typing := false
 
 var dialogue_lines := [
-	"Hi! I was generated for the dialogue system test.",
-	"This is the second line.",
-	"And this is the last line."
+	"St. Exuperat is the head mouse of Notre Dame.",
+	"He is responsible for the timely functioning of the clock.",
+	"It is a very serious responsibility.",
+	"He keeps the gears moving the only way he knows how."
 ]
 
 var current_line := 0

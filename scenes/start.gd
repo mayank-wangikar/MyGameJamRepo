@@ -13,8 +13,8 @@ func _ready():
 	
 
 func _on_start_button_pressed() -> void :
-	get_tree().change_scene_to_file("res://Scenes/Clockscene.tscn")
 	MusicManager.play_sfx(preload("res://assets/music/SFX/SweetSounds_SFX/WAV/Bump.wav"))
+	get_tree().change_scene_to_file("res://scenes/Clockscene.tscn")
 
 
 func _on_hover() -> void :

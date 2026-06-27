@@ -17,7 +17,11 @@ func _ready() -> void:
 func play_music(stream: AudioStream):
 	if music_player.stream == stream and music_player.playing:
 		return
-
+	# Enable looping based on the stream type
+	if stream is AudioStreamWAV:
+		stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	elif stream is AudioStreamOggVorbis or stream is AudioStreamMP3:
+		stream.loop = true
 	music_player.stream = stream
 	music_player.play()
 

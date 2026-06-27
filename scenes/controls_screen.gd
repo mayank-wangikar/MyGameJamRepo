@@ -14,5 +14,4 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept"):
-		print("enter")
 		get_tree().change_scene_to_file("res://scenes/GameManager.tscn")

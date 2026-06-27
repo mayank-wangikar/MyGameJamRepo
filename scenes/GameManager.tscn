@@ -1,13 +1,17 @@
 [gd_scene format=4 uid="uid://d1lp4cquf24u8"]
 
-[ext_resource type="Script" uid="uid://c85vqyhkjjwxh" path="res://scripts/game_manager.gd" id="1_3dus2"]
+[ext_resource type="Script" uid="uid://46o0fq40dt7h" path="res://scripts/game_manager.gd" id="1_3dus2"]
 [ext_resource type="PackedScene" uid="uid://i6hfdnwnet4r" path="res://scenes/typing_game.tscn" id="1_4dhvd"]
 [ext_resource type="PackedScene" uid="uid://rbsfjr1c38dd" path="res://scenes/launch.tscn" id="2_3dus2"]
 [ext_resource type="Texture2D" uid="uid://c7wm2tebjph58" path="res://assets/art/Window_final_chasm.png" id="3_rtub8"]
-[ext_resource type="Script" uid="uid://cuawo7wd45flh" path="res://scripts/mouse.gd" id="4_3dus2"]
+[ext_resource type="Script" uid="uid://dr4k3chpyjfid" path="res://scripts/mouse.gd" id="4_3dus2"]
 [ext_resource type="PackedScene" uid="uid://d4kuop2lu8xgl" path="res://scenes/mouse.tscn" id="5_rtub8"]
 [ext_resource type="Texture2D" uid="uid://dtueaoqw4f1f1" path="res://assets/art/TX Village Props.png" id="7_mx40s"]
 [ext_resource type="PackedScene" uid="uid://bqfbbuyi2furi" path="res://scenes/roll.tscn" id="8_2uts2"]
+[ext_resource type="PackedScene" uid="uid://d3aetwdl334mm" path="res://scenes/UIoverlay.tscn" id="9_2chjq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg7te"]
+bg_color = Color(0.19607843, 0.19215687, 0.23137255, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2uts2"]
 texture = ExtResource("7_mx40s")
@@ -1325,9 +1329,6 @@ texture = ExtResource("7_mx40s")
 [sub_resource type="TileSet" id="TileSet_2chjq"]
 sources/0 = SubResource("TileSetAtlasSource_2uts2")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg7te"]
-bg_color = Color(0.19607843, 0.19215687, 0.23137255, 1)
-
 [node name="GameManager" type="Node2D" unique_id=1972943202]
 position = Vector2(480, 270)
 script = ExtResource("1_3dus2")
@@ -1335,7 +1336,16 @@ script = ExtResource("1_3dus2")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=757988291]
 position = Vector2(480, 270)
 
+[node name="Panel" type="Panel" parent="." unique_id=1988879643]
+z_index = -1000
+offset_left = -480.0
+offset_top = -270.0
+offset_right = 480.0
+offset_bottom = 271.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jg7te")
+
 [node name="WindowFinalChasm" type="Sprite2D" parent="." unique_id=2029211891]
+modulate = Color(1, 1, 1, 0.5529412)
 position = Vector2(-5, 1)
 scale = Vector2(2, 2)
 texture = ExtResource("3_rtub8")
@@ -1363,14 +1373,6 @@ grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(0.3, 0.3)
 
-[node name="Panel" type="Panel" parent="." unique_id=1988879643]
-z_index = -1000
-offset_left = -480.0
-offset_top = -270.0
-offset_right = 480.0
-offset_bottom = 271.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_jg7te")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=454476918]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1011515232]
@@ -1388,3 +1390,16 @@ layout_mode = 2
 
 [node name="Roll" parent="." unique_id=647591223 instance=ExtResource("8_2uts2")]
 position = Vector2(-34, 160)
+
+[node name="Control" parent="." unique_id=2004591712 instance=ExtResource("9_2chjq")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -272.0
+offset_right = 480.0
+offset_bottom = 272.0
+grow_horizontal = 2
+grow_vertical = 2

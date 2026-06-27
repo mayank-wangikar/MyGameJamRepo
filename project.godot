@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Veryseriousgamejam"
-run/main_scene="uid://d1lp4cquf24u8"
+run/main_scene="uid://cvbjbyyxv0y8b"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -43,3 +43,4 @@ theme/custom_font="uid://bra1t3htrodk6"
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+textures/vram_compression/import_etc2_astc=true

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ce5afrtb8joea"]
 
 [ext_resource type="FontFile" uid="uid://b00y6ppax8il1" path="res://assets/font/Silver.ttf" id="1_j2gix"]
-[ext_resource type="Script" uid="uid://dp363o0evtgko" path="res://scenes/clockscene.gd" id="1_mytod"]
+[ext_resource type="Script" uid="uid://d1vwywj8ccb6n" path="res://scenes/clockscene.gd" id="1_mytod"]
 [ext_resource type="AudioStream" uid="uid://dbpo5xyt2p7dc" path="res://assets/music/SFX/SweetSounds_SFX/WAV/Click.wav" id="3_8dvlu"]
 
 [node name="Clockscene" type="Control" unique_id=86573697]
