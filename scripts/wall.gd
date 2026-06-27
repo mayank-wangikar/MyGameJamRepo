@@ -48,16 +48,31 @@ func _check_gear(gear: AnimatedSprite2D, key: String, projectile: Node) -> void:
 	if dist < 50.0:
 		_toggle_gear(key)
 		gear_cooldown[key] = COOLDOWN_TIME
-
-func _toggle_gear(key: String) -> void:
-	gear_state[key] = not gear_state[key]
+		
+func _apply_toggles(keys: Array) -> void:
 	var gears = {
 		"g1": g1, "g2": g2, "g3": g3,
 		"g4": g4, "g5": g5, "g6": g6,
 		"g7": g7, "g8": g8, "g9": g9
 	}
-	_set_gear(gears[key], gear_state[key])
+	for k in keys:
+		gear_state[k] = not gear_state[k]
+		_set_gear(gears[k], gear_state[k])
 	_check_win()
+
+func _toggle_gear(key: String) -> void:
+	var neighbors := {
+		"g1": ["g1", "g2", "g4", "g5"],
+		"g2": ["g2", "g1", "g3", "g4"],
+		"g3": ["g3", "g2", "g6"],
+		"g4": ["g4", "g1", "g5", "g7"],
+		"g5": ["g5", "g1", "g2", "g4", "g6"],
+		"g6": ["g6", "g3", "g5", "g9"],
+		"g7": ["g7", "g4", "g8"],
+		"g8": ["g8", "g7", "g9", "g5"],
+		"g9": ["g9", "g6", "g8", "g5"]
+	}
+	_apply_toggles(neighbors[key])
 
 func _set_gear(gear: AnimatedSprite2D, on: bool) -> void:
 	if on:

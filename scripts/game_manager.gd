@@ -28,6 +28,11 @@ func _ready() -> void:
 	typing_game.energy_changed.connect(_on_energy_changed)
 	bar.min_value = 0.0
 	bar.max_value = 100.0
+	# Snap camera instantly to mouse position before first frame
+	camera.position = mouse.position
+	camera.zoom = ZOOM_IN
+	_target_zoom = ZOOM_IN
+	_target_camera_pos = mouse.position
 	_enter_typing_phase()
 
 
